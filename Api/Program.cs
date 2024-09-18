@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
-
+//Probando push al repositorio
 builder.Services.AddMediatR(x =>
 {
     x.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
