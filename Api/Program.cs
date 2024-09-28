@@ -1,9 +1,11 @@
+using Api.Applicartion;
 using Api.Applicartion.Products;
 using Api.Domain.Entities;
 using Api.Domain.Repositories;
 using Api.Domain.UnitOfWork;
 using Api.Endpoints.Products;
 using Api.Extensions;
+using Api.Infrastructure.Notifications;
 using Api.Infrastructure.Repositories;
 using Api.Infrastructure.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 //Probando push al repositorio
 builder.Services.AddMediatR(x =>
 {
-    x.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
+    x.RegisterServicesFromAssembly(Api.Applicartion.AssemblyReference.Assembly);
 });
 
 builder.Services.AddEndpointsApiExplorer();
@@ -28,6 +30,7 @@ builder.Services.AddDbContext<Api.Infrastructure.ApiDbContext>(options =>
 builder.Services.AddScoped<IProductRespository, ProductRespository>();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IEmailSender, EmailSender>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<ProductsService>();
 var app = builder.Build();
